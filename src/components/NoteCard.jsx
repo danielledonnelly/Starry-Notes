@@ -32,14 +32,17 @@ export const NoteCard = ({ note }) => {
   const mouseMove = (e) => {
     const mouseMoveDir = {
       x: mouseStartPos.x - e.clientX,
-      y: mouseStartPos.y - e.clientY
+      y: mouseStartPos.y - e.clientY,
     };
 
-    console.log('mouseMoveDir:', mouseMoveDir);
+    mouseStartPos.x = e.clientX;
+    mouseStartPos.y = e.clientY;
 
-    mouseStartPos.x = e.clientX,
-    mouseStartPos.y = e.clientY
-  } 
+    setPosition({
+      x:cardRef.current.offsetLeft - mouseMoveDir.x,
+      y:cardRef.current.offsetTop - mouseMoveDir.y,
+    })
+  };
 
   return (
     <div
