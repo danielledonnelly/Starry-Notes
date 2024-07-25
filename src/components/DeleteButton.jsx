@@ -1,21 +1,23 @@
-import React from 'react'
-import Trash from '../icons/Trash'
+import Trash from "../icons/Trash";
 import { db } from "../appwrite/database";
+import { useContext } from "react";
+// import { NotesContext } from "../context/NotesContext";
 
-const DeleteButton = ({ noteId, setNotes }) => {
- 
-  const handleDelete = async (e) => {
-    db.notes.delete(noteId);
-      setNotes((prevState) =>
-          prevState.filter((note) => note.$id !== noteId)
-      );
-  };
+const DeleteButton = ({ noteId }) => {
+  console.log("Delete clicked")
+    const { setNotes } = useContext(NotesContext);
+    const handleDelete = async (e) => {
+        db.notes.delete(noteId);
 
-  return (
-      <div onClick={handleDelete}>
-          <Trash />
-      </div>
-  );
+        setNotes((prevState) =>
+            prevState.filter((note) => note.$id !== noteId)
+        );
+    };
+    return (
+        <div onClick={handleDelete}>
+            <Trash />
+        </div>
+    );
 };
 
-export default DeleteButton
+export default DeleteButton;

@@ -27,6 +27,7 @@ export const NoteCard = ({ note, setNotes }) => {
   }, []);
 
   const mouseDown = (e) => {
+    console.log("Mouse down was triggered.")
     if (e.target.className === "card-header") {
     // setZIndex(cardRef.current);
     mouseStartPos.x = e.clientX,
@@ -54,6 +55,7 @@ export const NoteCard = ({ note, setNotes }) => {
   };
 
   const mouseUp = () => {
+    console.log("Mouse up: saving...")
     document.removeEventListener("mousemove", mouseMove);
     document.removeEventListener("mouseup", mouseUp);
 
