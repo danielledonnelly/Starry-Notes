@@ -65,6 +65,7 @@ export const NoteCard = ({ note }) => {
     } catch (error) {
         console.error(error);
     }
+    setSaving(false);
 };
 
 const handleKeyUp = async () => {
@@ -103,7 +104,7 @@ const handleKeyUp = async () => {
           <span style={{ color: colors.colorText }}>Saving...</span>
         </div>
     )};
-    
+
       </div>
       <div className="card-body">
         <textarea
