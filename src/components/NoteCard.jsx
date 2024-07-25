@@ -1,11 +1,12 @@
 import { useRef, useEffect, useState } from "react";
-import React from "react";
+import {setNewOffset, autoGrow, setZIndex, bodyParser} from "../utils.js";
 import Trash from "../icons/Trash";
 
+
 export const NoteCard = ({ note }) => {
-  const body = JSON.parse(note.body);
+  const body = bodyParser(note.body);
   const [position, setPosition] = useState(JSON.parse(note.position));
-  const colors = JSON.parse(note.colors);
+  const colors = JSON.parse(note.color);
   
   let mouseStartPos = { x: 0, y: 0 };
   const cardRef = useRef(null);
@@ -16,17 +17,15 @@ export const NoteCard = ({ note }) => {
     autoGrow(textAreaRef);
   }, []);
 
-  const autoGrow = (textarea) => {
-    const { current } = textAreaRef;
-    current.style.height = "auto"; // Reset the height
-    current.style.height = current.scrollHeight + "px"; // Set the new height
-  };
-
   const mouseDown = (e) => {
+    // setZIndex(cardRef.current);
     mouseStartPos.x = e.clientX,
     mouseStartPos.y = e.clientY
 
-  document.addEventListener('mousemove', mouseMove)
+    document.addEventListener('mousemove', mouseMove)
+    document.addEventListener("mouseup", mouseUp);
+
+    setZIndex(cardRef.current);
   }
 
   const mouseMove = (e) => {
@@ -38,10 +37,15 @@ export const NoteCard = ({ note }) => {
     mouseStartPos.x = e.clientX;
     mouseStartPos.y = e.clientY;
 
-    setPosition({
-      x:cardRef.current.offsetLeft - mouseMoveDir.x,
-      y:cardRef.current.offsetTop - mouseMoveDir.y,
-    })
+    // Sets boundaries of draggable area
+    const newPosition = setNewOffset(cardRef.current, mouseMoveDir);
+    setPosition(newPosition);
+  };
+
+  // Ensures notes can be let go of after dragging
+  const mouseUp = () => {
+    document.removeEventListener("mousemove", mouseMove);
+    document.removeEventListener("mouseup", mouseUp);
   };
 
   return (
@@ -67,8 +71,13 @@ export const NoteCard = ({ note }) => {
           style={{ color: colors.colorText }}
           defaultValue={body}
           onInput={() => {autoGrow(textAreaRef)}}
+          onFocus={() => {
+            setZIndex(cardRef.current);
+          }}
         ></textarea>
       </div>
     </div>
   );
 };
+
+export default NoteCard; 
