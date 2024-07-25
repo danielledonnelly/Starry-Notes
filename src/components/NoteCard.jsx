@@ -1,10 +1,11 @@
 import { useRef, useEffect, useState } from "react";
 import {setNewOffset, autoGrow, setZIndex, bodyParser} from "../utils.js";
 import { db } from "../appwrite/database";
-import Trash from "../icons/Trash";
+import Spinner from "../icons/Spinner";
+import DeleteButton from "./DeleteButton.jsx";
 
 
-export const NoteCard = ({ note }) => {
+export const NoteCard = ({ note, setNotes }) => {
   // This prevents too many responses from happening when content is saved
   const [saving, setSaving] = useState(false);
   const keyUpTimer = useRef(null);
@@ -26,6 +27,7 @@ export const NoteCard = ({ note }) => {
   }, []);
 
   const mouseDown = (e) => {
+    if (e.target.className === "card-header") {
     // setZIndex(cardRef.current);
     mouseStartPos.x = e.clientX,
     mouseStartPos.y = e.clientY
@@ -34,6 +36,7 @@ export const NoteCard = ({ note }) => {
     document.addEventListener("mouseup", mouseUp);
 
     setZIndex(cardRef.current);
+    }
   }
 
   const mouseMove = (e) => {
@@ -98,9 +101,10 @@ const handleKeyUp = async () => {
         className="card-header"
         style={{ backgroundColor: colors.colorHeader }}
       >
-        <Trash />
+       <DeleteButton noteId={note.$id} setNotes={setNotes} />
         {saving && (
         <div className="card-saving">
+          <Spinner color={colors.colorText} />
           <span style={{ color: colors.colorText }}>Saving...</span>
         </div>
     )};
