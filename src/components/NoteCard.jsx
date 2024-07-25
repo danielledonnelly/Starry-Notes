@@ -5,6 +5,9 @@ import Trash from "../icons/Trash";
 
 
 export const NoteCard = ({ note }) => {
+  // This prevents too many responses from happening when content is saved
+  const [saving, setSaving] = useState(false);
+  const keyUpTimer = useRef(null);
   // Alternative code
   // let position = JSON.parse(note.position);
   // const colors = JSON.parse(note.colors);
@@ -47,14 +50,37 @@ export const NoteCard = ({ note }) => {
     setPosition(newPosition);
   };
 
-  // Ensures notes can be let go of after dragging
   const mouseUp = () => {
     document.removeEventListener("mousemove", mouseMove);
     document.removeEventListener("mouseup", mouseUp);
 
     const newPosition = setNewOffset(cardRef.current);
-    db.notes.update(note.$id, {position: JSON.stringify(newPosition)});
+    saveData('position', newPosition);
   };
+  
+  const saveData = async (key, value) => {
+    const payload = { [key]: JSON.stringify(value) };
+    try {
+        await db.notes.update(note.$id, payload);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+const handleKeyUp = async () => {
+  // Initiate "saving" state
+  setSaving(true);
+
+  // If we have a timer id, clear it so we can add another two seconds
+  if (keyUpTimer.current) {
+      clearTimeout(keyUpTimer.current);
+  }
+
+  // Set timer to trigger save in 2 seconds
+  keyUpTimer.current = setTimeout(() => {
+      saveData("body", textAreaRef.current.value);
+  }, 2000);
+};
 
   return (
     <div
@@ -72,6 +98,12 @@ export const NoteCard = ({ note }) => {
         style={{ backgroundColor: colors.colorHeader }}
       >
         <Trash />
+        {saving && (
+        <div className="card-saving">
+          <span style={{ color: colors.colorText }}>Saving...</span>
+        </div>
+    )};
+    
       </div>
       <div className="card-body">
         <textarea
@@ -82,6 +114,7 @@ export const NoteCard = ({ note }) => {
           onFocus={() => {
             setZIndex(cardRef.current);
           }}
+          onKeyUp={handleKeyUp}
         ></textarea>
       </div>
     </div>
