@@ -5,7 +5,8 @@ import { NotesContext } from "../context/NoteContext";
 // import { NotesContext } from "../context/NotesContext";
 
 const DeleteButton = ({ noteId }) => {
-  console.log("Delete clicked")
+//  Commented this out because for some reason it triggers constantly otherwise
+//  console.log("Delete clicked")
     const { setNotes } = useContext(NotesContext);
     const handleDelete = async (e) => {
         db.notes.delete(noteId);
