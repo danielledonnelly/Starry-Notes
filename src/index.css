@@ -18,10 +18,8 @@ body {
 }
 
 #app {
-  background-color: #212228;
-  background-image: linear-gradient(#292a30 0.1em, transparent 0.1em),
-      linear-gradient(90deg, #292a30 0.1em, transparent 0.1em);
-  background-size: 4em 4em;
+  background-color: #000;
+  background-image: linear-gradient(to bottom right, #000000, #140a2b, #432e5c);
   height: 100vh;
   position: relative;
   overflow: auto;
