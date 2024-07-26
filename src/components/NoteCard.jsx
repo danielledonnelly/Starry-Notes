@@ -5,7 +5,7 @@ import Spinner from "../icons/Spinner";
 import DeleteButton from "./DeleteButton.jsx";
 
 
-export const NoteCard = ({ note, setNotes }) => {
+export const NoteCard = ({ note }) => {
   // This prevents too many responses from happening when content is saved
   const [saving, setSaving] = useState(false);
   const keyUpTimer = useRef(null);
@@ -104,7 +104,7 @@ const handleKeyUp = async () => {
         className="card-header"
         style={{ backgroundColor: colors.colorHeader }}
       >
-       <DeleteButton noteId={note.$id} setNotes={setNotes} />
+       <DeleteButton noteId={note.$id} />
         {saving && (
         <div className="card-saving">
           <Spinner color={colors.colorText} />

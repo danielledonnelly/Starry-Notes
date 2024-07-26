@@ -4,10 +4,10 @@ import colors from "../assets/colors.json";
 import { useRef } from "react";
 import { db } from "../appwrite/databases";
 import { useContext } from "react";
-import { NoteContext } from "../context/NoteContext";
+import { NotesContext } from "../context/NoteContext";
 
 const AddButton = () => {
-    const { setNotes } = useContext(NoteContext);
+    const { setNotes } = useContext(NotesContext);
     const startingPos = useRef(10);
 
     const addNote = async () => {
