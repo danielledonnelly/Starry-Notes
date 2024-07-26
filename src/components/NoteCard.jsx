@@ -3,7 +3,7 @@ import { setNewOffset, autoGrow, setZIndex, bodyParser } from "../utils.js";
 import { db } from "../appwrite/database";
 import Spinner from "../icons/Spinner";
 import DeleteButton from "./DeleteButton.jsx";
-import color from "../assets/color.json";
+import colors from "../assets/colors.json";
 const defaultColor = {
   colorBody: 'defaultBodyColor', 
   colorHeader: 'defaultHeaderColor'
