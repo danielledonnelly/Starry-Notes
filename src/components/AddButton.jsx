@@ -2,7 +2,7 @@ import React from "react";
 import Plus from "../icons/Plus";
 import colors from "../assets/colors.json";
 import { useRef } from "react";
-import { db } from "../appwrite/databases";
+import { db } from "../appwrite/database";
 import { useContext } from "react";
 import { NotesContext } from "../context/NoteContext";
 

@@ -13,3 +13,5 @@ const Plus = ({ size = "24", color = "#FFFFFF" }) => {
       </svg>
   );
 };
+
+export default Plus;

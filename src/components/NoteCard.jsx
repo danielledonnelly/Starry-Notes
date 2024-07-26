@@ -3,7 +3,7 @@ import { setNewOffset, autoGrow, setZIndex, bodyParser } from "../utils.js";
 import { db } from "../appwrite/database";
 import Spinner from "../icons/Spinner";
 import DeleteButton from "./DeleteButton.jsx";
-
+import color from "../assets/color.json";
 
 export const NoteCard = ({ note }) => {
   // This prevents too many responses from happening when content is saved
@@ -15,7 +15,7 @@ export const NoteCard = ({ note }) => {
   // const body = bodyParser(note.body);
   const body = bodyParser(note.body);
   const [position, setPosition] = useState(JSON.parse(note.position));
-  const colors = JSON.parse(note.color);
+  const color = JSON.parse(note.color);
   
   let mouseStartPos = { x: 0, y: 0 };
   const cardRef = useRef(null);
@@ -94,7 +94,7 @@ const handleKeyUp = async () => {
       ref={cardRef}
       className="card"
       style={{
-        backgroundColor: colors.colorBody,
+        backgroundColor: color.colorBody,
         left: `${position.x}px`,
         top: `${position.y}px`,
       }}
@@ -102,13 +102,13 @@ const handleKeyUp = async () => {
       <div
         onMouseDown={mouseDown}
         className="card-header"
-        style={{ backgroundColor: colors.colorHeader }}
+        style={{ backgroundColor: color.colorHeader }}
       >
        <DeleteButton noteId={note.$id} />
         {saving && (
         <div className="card-saving">
-          <Spinner color={colors.colorText} />
-          <span style={{ color: colors.colorText }}>Saving...</span>
+          <Spinner color={color.colorText} />
+          <span style={{ color: color.colorText }}>Saving...</span>
         </div>
     )};
 

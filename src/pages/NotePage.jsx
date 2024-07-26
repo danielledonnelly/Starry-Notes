@@ -5,22 +5,9 @@ import { databases } from "../appwrite/config";
 import NoteCard from "../components/NoteCard";
 import { useContext } from "react";
 import { NotesContext } from "../context/NoteContext";
+import Controls from '../components/Controls';
 
-const NotePage = () => {
-  const { notes, setNotes } = useContext(NotesContext);
-
-useEffect(() => {
-  init();
-}, []);
-
-  const init= async () => {
-    const response = await db.notes.list()
-    setNotes(response.documents);
-
-    console.log(response);
-  }}
-
-  const NotesPage = () => {
+  const NotePage = () => {
     const { notes } = useContext(NotesContext);
     return (
         <div>
@@ -33,4 +20,4 @@ useEffect(() => {
 };
 
 
-export default NotePage
+export default NotePage;
