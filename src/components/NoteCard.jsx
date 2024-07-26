@@ -4,6 +4,11 @@ import { db } from "../appwrite/database";
 import Spinner from "../icons/Spinner";
 import DeleteButton from "./DeleteButton.jsx";
 import color from "../assets/color.json";
+const defaultColor = {
+  colorBody: 'defaultBodyColor', 
+  colorHeader: 'defaultHeaderColor'
+};
+
 
 export const NoteCard = ({ note }) => {
   // This prevents too many responses from happening when content is saved
@@ -94,7 +99,7 @@ const handleKeyUp = async () => {
       ref={cardRef}
       className="card"
       style={{
-        backgroundColor: color.colorBody,
+        backgroundColor: color ? color.colorBody : defaultColor.colorBody,
         left: `${position.x}px`,
         top: `${position.y}px`,
       }}
@@ -102,7 +107,7 @@ const handleKeyUp = async () => {
       <div
         onMouseDown={mouseDown}
         className="card-header"
-        style={{ backgroundColor: color.colorHeader }}
+        style={{ backgroundColor: color ? color.colorHeader : defaultColor.colorHeader }}
       >
        <DeleteButton noteId={note.$id} />
         {saving && (
@@ -116,7 +121,7 @@ const handleKeyUp = async () => {
       <div className="card-body">
         <textarea
           ref={textAreaRef}
-          style={{ color: colors.colorText }}
+          style={{ color: color ? color.colorText : 'defaultTextColor' }}
           defaultValue={body}
           onInput={() => {autoGrow(textAreaRef)}}
           onFocus={() => {
