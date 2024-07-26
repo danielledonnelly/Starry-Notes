@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import {setNewOffset, autoGrow, setZIndex, bodyParser} from "../utils.js";
+import { setNewOffset, autoGrow, setZIndex, bodyParser } from "../utils.js";
 import { db } from "../appwrite/database";
 import Spinner from "../icons/Spinner";
 import DeleteButton from "./DeleteButton.jsx";
@@ -24,6 +24,7 @@ export const NoteCard = ({ note, setNotes }) => {
 
   useEffect(() => {
     autoGrow(textAreaRef);
+    setZIndex(cardRef.current);
   }, []);
 
   const mouseDown = (e) => {

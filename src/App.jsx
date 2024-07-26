@@ -5,11 +5,14 @@
 // And make you can link notes together with lines, like stars in a constellation
 
 import NotePage from "./pages/NotePage";
+import NoteProvider from "./context/NoteContext";
  
 function App() {
     return (
         <div id="app">
-            <NotePage />
+            <NoteProvider>
+                <NotePage />
+            </NoteProvider>
         </div>
     );
 }

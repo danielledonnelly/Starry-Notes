@@ -3,9 +3,11 @@ import { useState, useEffect } from 'react'
 import { db } from '../appwrite/database';
 import { databases } from "../appwrite/config";
 import NoteCard from "../components/NoteCard";
+import { useContext } from "react";
+import { NotesContext } from "../context/NoteContext";
 
 const NotePage = () => {
-  const [notes, setNotes] = useState([])
+  const { notes, setNotes } = useContext(NotesContext);
 
 useEffect(() => {
   init();
@@ -16,12 +18,19 @@ useEffect(() => {
     setNotes(response.documents);
 
     console.log(response);
-  }
+  }}
 
-  return <div>
-    {notes.map(note => (
-      <NoteCard key={note.$id} note={note} setNotes={setNotes}/>
-    ))}
-  </div>
+  const NotesPage = () => {
+    const { notes } = useContext(NotesContext);
+    return (
+        <div>
+            {notes.map((note) => (
+                <NoteCard note={note} key={note.$id} />
+            ))}
+            <Controls />
+        </div>
+    );
 };
+
+
 export default NotePage

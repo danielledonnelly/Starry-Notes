@@ -84,3 +84,39 @@ textarea:focus {
   align-items: center;
   gap: 5px;
 }
+
+#controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  position: fixed;
+  left: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #35363e;
+  padding: 1em 1em;
+  border-radius: 40px;
+
+  box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075), 0 2px 2px hsl(0deg 0% 0% /
+                  0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075), 0 8px 8px hsl(0deg
+                  0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+  z-index: 10000;
+}
+
+#add-btn {
+  background-color: rgba(107, 107, 107, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#add-btn:hover {
+  height: 45px;
+  width: 45px;
+}
