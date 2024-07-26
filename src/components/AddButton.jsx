@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { NotesContext } from "../context/NoteContext";
 
 const AddButton = () => {
-    const { setNotes } = useContext(NotesContext);
+    // const { setNotes } = useContext(NotesContext);
     const startingPos = useRef(10);
 
     const addNote = async () => {

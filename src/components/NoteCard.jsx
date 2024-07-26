@@ -99,7 +99,7 @@ const handleKeyUp = async () => {
       ref={cardRef}
       className="card"
       style={{
-        backgroundColor: color ? color.colorBody : defaultColor.colorBody,
+        backgroundColor: colors ? colors.colorBody : defaultColor.colorBody,
         left: `${position.x}px`,
         top: `${position.y}px`,
       }}
@@ -107,13 +107,13 @@ const handleKeyUp = async () => {
       <div
         onMouseDown={mouseDown}
         className="card-header"
-        style={{ backgroundColor: color ? color.colorHeader : defaultColor.colorHeader }}
+        style={{ backgroundColor: colors ? colors.colorHeader : defaultColor.colorHeader }}
       >
        <DeleteButton noteId={note.$id} />
         {saving && (
         <div className="card-saving">
-          <Spinner color={color.colorText} />
-          <span style={{ color: color.colorText }}>Saving...</span>
+          <Spinner color={colors.colorText} />
+          <span style={{ color: colors.colorText }}>Saving...</span>
         </div>
     )};
 
@@ -121,7 +121,7 @@ const handleKeyUp = async () => {
       <div className="card-body">
         <textarea
           ref={textAreaRef}
-          style={{ color: color ? color.colorText : 'defaultTextColor' }}
+          style={{ color: colors ? colors.colorText : 'defaultTextColor' }}
           defaultValue={body}
           onInput={() => {autoGrow(textAreaRef)}}
           onFocus={() => {
