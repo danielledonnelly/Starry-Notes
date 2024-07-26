@@ -6,25 +6,28 @@ import DeleteButton from "./DeleteButton.jsx";
 import colors from "../assets/colors.json";
 const defaultColor = {
   colorBody: 'defaultBodyColor', 
-  colorHeader: 'defaultHeaderColor'
+  colorHeader: 'defaultHeaderColor',
+  colorText: 'defaultTextColor'
 };
 
-
 export const NoteCard = ({ note }) => {
-  // This prevents too many responses from happening when content is saved
   const [saving, setSaving] = useState(false);
   const keyUpTimer = useRef(null);
-  // Alternative code
-  // let position = JSON.parse(note.position);
-  // const colors = JSON.parse(note.colors);
-  // const body = bodyParser(note.body);
   const body = bodyParser(note.body);
-  const [position, setPosition] = useState(JSON.parse(note.position));
-  const color = JSON.parse(note.color);
   
+  const parseJSON = (data, defaultValue) => {
+    try {
+      return JSON.parse(data);
+    } catch {
+      return defaultValue;
+    }
+  };
+
+  const [position, setPosition] = useState(parseJSON(note.position, { x: 0, y: 0 }));
+  const colors = parseJSON(note.color, defaultColor);
+
   let mouseStartPos = { x: 0, y: 0 };
   const cardRef = useRef(null);
-
   const textAreaRef = useRef(null);
 
   useEffect(() => {
@@ -33,18 +36,16 @@ export const NoteCard = ({ note }) => {
   }, []);
 
   const mouseDown = (e) => {
-    console.log("Mouse down was triggered.")
     if (e.target.className === "card-header") {
-    // setZIndex(cardRef.current);
-    mouseStartPos.x = e.clientX,
-    mouseStartPos.y = e.clientY
+      mouseStartPos.x = e.clientX;
+      mouseStartPos.y = e.clientY;
 
-    document.addEventListener('mousemove', mouseMove)
-    document.addEventListener("mouseup", mouseUp);
+      document.addEventListener('mousemove', mouseMove);
+      document.addEventListener("mouseup", mouseUp);
 
-    setZIndex(cardRef.current);
+      setZIndex(cardRef.current);
     }
-  }
+  };
 
   const mouseMove = (e) => {
     const mouseMoveDir = {
@@ -55,13 +56,11 @@ export const NoteCard = ({ note }) => {
     mouseStartPos.x = e.clientX;
     mouseStartPos.y = e.clientY;
 
-    // Sets boundaries of draggable area
     const newPosition = setNewOffset(cardRef.current, mouseMoveDir);
     setPosition(newPosition);
   };
 
   const mouseUp = () => {
-    console.log("Mouse up: saving...")
     document.removeEventListener("mousemove", mouseMove);
     document.removeEventListener("mouseup", mouseUp);
 
@@ -72,34 +71,31 @@ export const NoteCard = ({ note }) => {
   const saveData = async (key, value) => {
     const payload = { [key]: JSON.stringify(value) };
     try {
-        await db.notes.update(note.$id, payload);
+      await db.notes.update(note.$id, payload);
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
     setSaving(false);
-};
+  };
 
-const handleKeyUp = async () => {
-  // Initiate "saving" state
-  setSaving(true);
+  const handleKeyUp = async () => {
+    setSaving(true);
 
-  // If we have a timer id, clear it so we can add another two seconds
-  if (keyUpTimer.current) {
+    if (keyUpTimer.current) {
       clearTimeout(keyUpTimer.current);
-  }
+    }
 
-  // Set timer to trigger save in 2 seconds
-  keyUpTimer.current = setTimeout(() => {
+    keyUpTimer.current = setTimeout(() => {
       saveData("body", textAreaRef.current.value);
-  }, 2000);
-};
+    }, 2000);
+  };
 
   return (
     <div
       ref={cardRef}
       className="card"
       style={{
-        backgroundColor: colors ? colors.colorBody : defaultColor.colorBody,
+        backgroundColor: colors.colorBody,
         left: `${position.x}px`,
         top: `${position.y}px`,
       }}
@@ -107,21 +103,20 @@ const handleKeyUp = async () => {
       <div
         onMouseDown={mouseDown}
         className="card-header"
-        style={{ backgroundColor: colors ? colors.colorHeader : defaultColor.colorHeader }}
+        style={{ backgroundColor: colors.colorHeader }}
       >
-       <DeleteButton noteId={note.$id} />
+        <DeleteButton noteId={note.$id} />
         {saving && (
-        <div className="card-saving">
-          <Spinner color={colors.colorText} />
-          <span style={{ color: colors.colorText }}>Saving...</span>
-        </div>
-    )};
-
+          <div className="card-saving">
+            <Spinner color={colors.colorText} />
+            <span style={{ color: colors.colorText }}>Saving...</span>
+          </div>
+        )}
       </div>
       <div className="card-body">
         <textarea
           ref={textAreaRef}
-          style={{ color: colors ? colors.colorText : 'defaultTextColor' }}
+          style={{ color: colors.colorText }}
           defaultValue={body}
           onInput={() => {autoGrow(textAreaRef)}}
           onFocus={() => {
@@ -134,4 +129,4 @@ const handleKeyUp = async () => {
   );
 };
 
-export default NoteCard; 
+export default NoteCard;
