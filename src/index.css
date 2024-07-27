@@ -27,9 +27,6 @@ body {
   overflow: auto;
 }
 
-
-
-
 .card {
   width: 400px;
   border-radius: 5px;
@@ -133,6 +130,7 @@ textarea:focus {
   z-index: 999; 
   fill: #ffffff; /* Ensures the plus sign is white */
 }
+
 #add-btn:hover {
   height: 45px;
   width: 45px;
