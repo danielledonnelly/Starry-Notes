@@ -2,7 +2,7 @@ import Trash from "../icons/Trash";
 import { db } from "../appwrite/database";
 import { useContext } from "react";
 import { NotesContext } from "../context/NoteContext";
-import TrashIcon from '../icons/trash.svg';
+import XIcon from '../icons/x.svg';
 // import { NotesContext } from "../context/NotesContext";
 
 const DeleteButton = ({ noteId }) => {
@@ -18,6 +18,7 @@ const DeleteButton = ({ noteId }) => {
     return (
         <div onClick={handleDelete}>
             <Trash />
+            <img src={XIcon} alt="Sun" className="sun-icon" />
         </div>
     );
 };
