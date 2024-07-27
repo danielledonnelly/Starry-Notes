@@ -152,7 +152,7 @@ textarea:focus {
 }
 
 .delete-icon {
-  width: 24px; // Match the size of your other icons
+  width: 24px;
   height: 24px;
   cursor: pointer;
 }
