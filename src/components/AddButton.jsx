@@ -1,5 +1,6 @@
 import React from "react";
 import Plus from "../icons/Plus";
+import SunIcon from '../icons/sun.svg';
 import colors from "../assets/colors.json";
 import { useRef } from "react";
 import { db } from "../appwrite/database";
@@ -28,6 +29,7 @@ const AddButton = () => {
     return (
         <div id="add-btn" onClick={addNote}>
             <Plus />
+            <img src={SunIcon} alt="Sun" className="sun-icon" />
         </div>
     );
 };

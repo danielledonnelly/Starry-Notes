@@ -19,11 +19,16 @@ body {
 
 #app {
   background-color: #000;
-  background-image: linear-gradient(to bottom right, #000000, #140a2b, #432e5c);
+  background-image: 
+    linear-gradient(to bottom right, #432e5c, #140a2b, #000000); 
+  background-size: cover;
   height: 100vh;
   position: relative;
   overflow: auto;
 }
+
+
+
 
 .card {
   width: 400px;
@@ -114,6 +119,20 @@ textarea:focus {
   transition: 0.3s;
 }
 
+.add-btn img.sun-icon {
+  position: absolute;
+  width: 100%;  
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%; 
+  z-index: 0; 
+}
+
+.add-btn svg {
+  position: relative;
+  z-index: 999; 
+  fill: #ffffff; /* Ensures the plus sign is white */
+}
 #add-btn:hover {
   height: 45px;
   width: 45px;
