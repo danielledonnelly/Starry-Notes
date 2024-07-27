@@ -150,3 +150,13 @@ textarea:focus {
   height: 45px;
   width: 45px;
 }
+
+.delete-icon {
+  width: 24px; // Match the size of your other icons
+  height: 24px;
+  cursor: pointer;
+}
+
+.delete-icon:hover {
+  opacity: 0.8;
+}
