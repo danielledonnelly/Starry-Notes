@@ -1,8 +1,8 @@
 [
   {
       "id": "color-red",
-      "colorHeader": "#FFA6A6",
-      "colorBody": "#FFB3AB",
+      "colorHeader": "#FFC2C2",
+      "colorBody": "#FFE4E4",
       "colorText": "#18181A"
   },
   {
@@ -13,14 +13,14 @@
   },
   {
       "id": "color-purple",
-      "colorHeader": "#8E66FF",
-      "colorBody": "#D4B3FF",
+      "colorHeader": "#CFA6FF",
+      "colorBody": "#E8D9FF",
       "colorText": "#18181A"
   },
   {
       "id": "color-blue",
-      "colorHeader": "#A7C0F2",
-      "colorBody": "#A9DEFF",
+      "colorHeader": "#B7D7FF",
+      "colorBody": "#D6E6FF",
       "colorText": "#18181A"
   }
 ]
