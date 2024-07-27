@@ -6,20 +6,20 @@ import XIcon from '../icons/x.svg';
 // import { NotesContext } from "../context/NotesContext";
 
 const DeleteButton = ({ noteId }) => {
+//  Commented this out because for some reason it triggers constantly otherwise
+//  console.log("Delete clicked")
     const { setNotes } = useContext(NotesContext);
     const handleDelete = async (e) => {
-        await db.notes.delete(noteId); // Ensure to wait for the delete to complete
+        db.notes.delete(noteId);
         setNotes((prevState) =>
             prevState.filter((note) => note.$id !== noteId)
         );
     };
-
     return (
         <div onClick={handleDelete}>
-            <img src={XIcon} alt="Delete" className="delete-icon" />
+            <Trash />
         </div>
     );
 };
-
 
 export default DeleteButton;
