@@ -1,4 +1,8 @@
 import React from "react";
+import RedIcon from "../icons/red.svg";
+import PinkIcon from "../icons/pink.svg";
+import PurpleIcon from "../icons/purple.svg";
+import BlueIcon from "../icons/blue.svg";
 import { useContext } from "react";
 import { NotesContext } from "../context/NoteContext";
 import { db } from "../appwrite/database";
@@ -31,12 +35,21 @@ const Color = ({ color }) => {
         }
     };
 
+    const Icon = {
+        "color-red": RedIcon,
+        "color-pink": PinkIcon,
+        "color-purple": PurpleIcon,
+        "color-blue": BlueIcon
+    }[color.id];
+
     return (
         <div
             onClick={changeColor}
             className="color"
             style={{ backgroundColor: color.colorHeader }}
-        ></div>
+        >
+            <img src={Icon} alt={`${color.id} color`} />
+        </div>
     );
 };
 

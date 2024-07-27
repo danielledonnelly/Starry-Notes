@@ -128,19 +128,27 @@ textarea:focus {
 }
 
 .color {
-  background-color: grey;
-  height: 40px;
+  background-color: transparent; 
   width: 40px;
+  height: 40px;
   border-radius: 50%;
-
   cursor: pointer;
-  transition: 0.3s;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.color:hover {
-  height: 45px;
-  width: 45px;
+.color img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;  
 }
+
+.color:hover img {
+  transform: scale(1.1);  
+}
+
 
 .delete-icon {
   width: 24px;
@@ -150,4 +158,17 @@ textarea:focus {
 
 .delete-icon:hover {
   opacity: 0.8;
+
+  /* Icon general styling */
+.icon {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
 }
