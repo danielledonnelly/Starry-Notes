@@ -20,12 +20,15 @@ body {
 #app {
   background-color: #000;
   background-image: 
-    linear-gradient(to bottom right, #432e5c, #140a2b, #000000); 
+    /* linear-gradient(to bottom right, #432e5c, #140a2b, #000000), */
+    url('/src/assets/starry-background.png'); 
   background-size: cover;
+  background-repeat: no-repeat;
   height: 100vh;
   position: relative;
   overflow: auto;
 }
+
 
 .card {
   width: 400px;
@@ -76,7 +79,8 @@ textarea:focus {
 }
 
 .spinner {
-  animation: spin var(--spinner-animation-speed) linear infinite;
+  /* animation: spin var(--spinner-animation-speed) linear infinite; */
+  height: 30px !important;
 }
 
 .card-saving {
@@ -138,18 +142,13 @@ textarea:focus {
   justify-content: center;
 }
 
+.color img {
+  height: 60px;
+}
+
 .color:hover {
   height: 50px;
   width: 50px;
-}
-
-.color img {
-  height: 60px;
-  transition: transform 0.3s ease;  
-}
-
-.color:hover img {
-  transform: scale(1.6);  
 }
 
 .delete-icon {
@@ -167,10 +166,6 @@ textarea:focus {
   height: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-.icon:hover {
-  transform: scale(1.1);
 }
 
 }

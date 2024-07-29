@@ -11,6 +11,11 @@ const Color = ({ color }) => {
     const { selectedNote, notes, setNotes } = useContext(NotesContext);
 
     const changeColor = () => {
+        if (!selectedNote) {
+            alert("Whoa there, space cowboy! You have to select a note before changing colors.");
+            return;
+        }
+
         console.log("Selected color:", selectedNote);
 
         try {
@@ -31,7 +36,8 @@ const Color = ({ color }) => {
                 colors: JSON.stringify(color),
             });
         } catch (error) {
-            alert("Please select a note before changing colors.");
+            console.error("Error updating note color:", error);
+            alert("An error occurred while updating the note color.");
         }
     };
 
@@ -45,7 +51,7 @@ const Color = ({ color }) => {
     return (
         <div
             onClick={changeColor}
-            className={'color ${color.id}'}
+            className={`color ${color.id} color-icon`} 
             style={{ backgroundColor: color.colorHeader }}
         >
             <img src={Icon} alt={`${color.id} color`} />
