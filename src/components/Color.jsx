@@ -45,7 +45,7 @@ const Color = ({ color }) => {
     return (
         <div
             onClick={changeColor}
-            className="color"
+            className={'color ${color.id}'}
             style={{ backgroundColor: color.colorHeader }}
         >
             <img src={Icon} alt={`${color.id} color`} />
